@@ -6,7 +6,7 @@ char    *get_next_line(int fd)
     static t_list *stash = NULL;
     char                  *line;
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
+    if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
     line = NULL;
     read_and_stash(fd, &stash);
@@ -28,26 +28,26 @@ void    read_and_stash(int fd, t_list **stash)
 {
     char    *buff;
     int     readed;
-
-    readed = 1;
+    
+	readed = 1;
     while (!(found_nl(*stash)) && readed != 0)
     {
         buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
         if (!buff)
             return;
-        readed = (int)read(fd, &buff, BUFFER_SIZE);
-        if ((*stash == NULL) && (readed == 0 || readed == -1))
+		readed = read(fd, buff, BUFFER_SIZE);
+        if (*stash == NULL && (readed == 0 || readed == -1))
         {
             free(buff);
             return;
         }
         buff[readed] = '\0';
-        add_to_stash(stash, buff, readed);
+        add_to_stash(stash, &buff, readed);
         free(buff);
     }
 }
 
-void    add_to_stash(t_list **stash, char   *buff, int readed)
+void    add_to_stash(t_list **stash, char **buff, int readed)
 {
     int     i;
     t_list  *last;
@@ -61,9 +61,9 @@ void    add_to_stash(t_list **stash, char   *buff, int readed)
     if (new_node->content == NULL)
         return;
     i = 0;
-    while (buff[i] && i < readed)
+    while (i < readed)
     {
-        new_node->content[i] = buff[i];
+        new_node->content[i] = (*buff)[i];
         i++;
     }
     new_node->content[i] = '\0';
@@ -141,13 +141,16 @@ int	main(void)
 	char	*line;
 
 	fd = open("test", O_RDONLY);
+	if(fd < 2)
+		printf("error\n");
 	while (1)
 	{
 		line = get_next_line(fd);
-		printf("%s", line);
 		if (line == NULL)
 			break ;
+		printf("%s", line);
 		free(line);
 	}
+	close(fd);
 	return (0);
 }
