@@ -3,21 +3,21 @@
 
 char    *get_next_line(int fd)
 {    
-    static t_list *stash = NULL;
-    char                  *line;
+    static t_list	*stash[4096];
+    char		*line;
 
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
     line = NULL;
-    read_and_stash(fd, &stash);
-    if (stash == NULL)
+    read_and_stash(fd, &stash[fd]);
+    if (stash[fd] == NULL)
         return (NULL);
-    add_to_line(stash, &line);
-    clean_stash(&stash);
+    add_to_line(stash[fd], &line);
+    clean_stash(&stash[fd]);
     if (line[0] == '\0')
     {
-        free_stash(stash);
-        stash = NULL;
+        free_stash(stash[fd]);
+        stash[fd] = NULL;
         free(line);
         return (NULL);
     }
@@ -137,20 +137,32 @@ void    clean_stash(t_list **stash)
 
 int	main(void)
 {
-	int		fd;
-	char	*line;
+	int		fd1;
+	int		fd2;
+	int		fd3;
+	char	*line1;
+	char	*line2;
+	char	*line3;
 
-	fd = open("test", O_RDONLY);
-	if(fd < 2)
-		printf("error\n");
+	fd1 = open("test/test1", O_RDONLY);
+	fd2 = open("test/test2", O_RDONLY);
+	fd3 = open("test/test3", O_RDONLY);
 	while (1)
 	{
-		line = get_next_line(fd);
-		if (line == NULL)
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
+		line3 = get_next_line(fd3);
+		if (line3 == NULL)
 			break ;
-		printf("%s", line);
-		free(line);
+		printf("%s", line1);
+		printf("%s", line2);
+		printf("%s", line3);
+		free(line1);
+		free(line2);
+		free(line3);
 	}
-	close(fd);
+	close(fd1);
+	close(fd2);
+	close(fd3);
 	return (0);
 }

@@ -4,10 +4,10 @@ CFLAGS = -Wall -Wextra -Werror -g -D BUFFER_SIZE=42
 
 NAME = gnl
 
-SOURCE =	get_next_line.c	\
-			get_next_line_utils.c
+SOURCE =	src/get_next_line.c	\
+			src/get_next_line_utils.c
 
-INCLUDE = -I ./
+INCLUDE = -I ./include
 
 OBJECTS = $(SOURCE:%c=%o) #$(patsubst %.c,%.o,$(SOURCE))
 
@@ -16,7 +16,7 @@ all: $(NAME)
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $^
 
-$(NAME): $(OBJECTS) get_next_line.h
+$(NAME): $(OBJECTS) include/get_next_line.h
 	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJECTS) -o $(NAME)
 
 
