@@ -4,7 +4,7 @@
 This project will not only allow you to add a very convenient function to your collection,
 but it will also make you learn a highly interesting new concept in C programming: static
 variables.
-## Installation
+## 🛠 Installation
 
 Clone the repository:
 
@@ -12,7 +12,7 @@ Clone the repository:
   git clone https://github.com/salecler/get_next_line.git
 ```
     
-## Deployment
+## ⚙️ Deployment
 
 To deploy this project run:
 
@@ -23,7 +23,7 @@ Then you can run it:
 ````
 ./gnl
 ````
-## Instructions
+## 👨‍🏫 Instructions
 
 • Repeated calls (e.g., using a loop) to your get_next_line() function should let
 you read the text file pointed to by the file descriptor, one line at a time.
@@ -58,7 +58,7 @@ end of file.
 • We also consider that get_next_line() has an undefined behavior when reading
 a binary file. However, you can implement a logical way to handle this behavior if
 you want to.
-## Features
+## 🤠 Features
 
 Make:
 - clean/fclean
@@ -71,7 +71,7 @@ Make:
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sacha-leclercq-245584243/)
 
 
-## Authors
+## 👋 Authors
 
 - [@salecler](https://www.github.com/salecler)
 
