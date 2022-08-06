@@ -75,3 +75,4 @@ Make:
 
 - [@salecler](https://www.github.com/salecler)
 
+<a href="[https://github.com/JaeSeoKim/badge42](https://profile.intra.42.fr/users/salecler)" target=”_blank”><img src="https://badge42.vercel.app/api/v2/cl4wihxp0008809migsvxuh4t/project/2643043" alt="salecler's 42 get_next_line Score" /></a>
