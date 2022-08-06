@@ -9,7 +9,7 @@ int found_nl(t_list *stash)
         return (0);
     current = ft_lst_get_last(stash);
     i = 0;
-    while (i <= BUFFER_SIZE)
+    while (current->content[i])
     {
         if (current->content[i] == '\n')
             return (1);
